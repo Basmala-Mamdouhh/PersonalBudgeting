@@ -62,4 +62,10 @@ public class UserDB {
     public int getNextId() {
         return users.stream().mapToInt(User::getId).max().orElse(0) + 1;
     }
+
+    public void clearAllUsers() {
+        users.clear();
+        saveUsers();
+        System.out.println("All users have been deleted.");
+    }
 }

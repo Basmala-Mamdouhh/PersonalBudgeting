@@ -1,26 +1,54 @@
 package controller;
 
+import service.AuthService;
 import DataBase.UserDB;
-import service.LoginService;
-import service.SignUpService;
+import model.User;
+import model.PasswordHasher;
 
 public class UserController {
-    private final SignUpService signUpService;
-    private final LoginService loginService;
+    private final UserDB userDB;
 
-    public UserController() {
-        UserDB userRepository = new UserDB();
-        this.signUpService = new SignUpService(userRepository);
-        this.loginService = new LoginService(userRepository);
+    public UserController(UserDB userDB) {
+        this.userDB = userDB;
     }
 
-    public void handleSignUp(String email, String username, String password) {
-        String result = signUpService.register(email, username, password);
-        System.out.println(result);
+    public void handleSignUp(String email, String username, String password, String phone) {
+        if (!AuthService.isValidEmail(email)) {
+            System.out.println("Invalid email format.");
+            return;
+        }
+        if (!AuthService.isStrongPassword(password)) {
+            System.out.println("Weak password.");
+            return;
+        }
+        if (userDB.emailExists(email)) {
+            System.out.println("Email already exists.");
+            return;
+        }
+        if (userDB.usernameExists(username)) {
+            System.out.println("Username already exists.");
+            return;
+        }
+
+        int id = userDB.getNextId();
+        String hashed = PasswordHasher.hash(password);
+        User user = new User(id, email, username,phone, hashed);
+        userDB.addUser(user);
+        System.out.println("Account created successfully.");
     }
 
-    public void handleLogin(String username, String password) {
-        String result = loginService.login(username, password);
-        System.out.println(result);
+    public void handleLogin(String email, String password) {
+        User user = userDB.findByEmail(email);
+        if (user == null) {
+            System.out.println("User not found.");
+            return;
+        }
+
+        if (!user.getPasswordHash().equals(PasswordHasher.hash(password))) {
+            System.out.println("Invalid password.");
+            return;
+        }
+
+        System.out.println("Login successful. Welcome, " + user.getUsername());
     }
 }
