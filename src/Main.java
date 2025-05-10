@@ -54,7 +54,6 @@ public class Main {
                     System.out.println("Invalid choice. Try again.");
             }
         }
-
         scanner.close();
     }
 }

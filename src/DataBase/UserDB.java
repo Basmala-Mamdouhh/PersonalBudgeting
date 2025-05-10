@@ -46,6 +46,7 @@ public class UserDB {
         return users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
     }
 
+
     public User findByEmail(String email) {
         return users.stream().filter(u -> u.getEmail().equalsIgnoreCase(email)).findFirst().orElse(null);
     }

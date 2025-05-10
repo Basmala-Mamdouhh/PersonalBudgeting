@@ -21,6 +21,12 @@ public class UserController {
             System.out.println("Weak password.");
             return;
         }
+
+        if(!AuthService.isValidPhone(phone)) {
+            System.out.println("Invalid phone number.");
+            return;
+        }
+
         if (userDB.emailExists(email)) {
             System.out.println("Email already exists.");
             return;

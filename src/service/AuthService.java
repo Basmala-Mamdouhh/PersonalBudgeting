@@ -6,7 +6,7 @@ public class AuthService {
     }
 
     public static boolean isStrongPassword(String password) {
-        return password != null && password.length() >= 6;
+        return password != null && password.length() >= 8;
     }
 
     public static boolean isValidUsername(String username) {
@@ -14,6 +14,9 @@ public class AuthService {
     }
 
     public static boolean isValidPhone(String phone) {
-        return phone != null && phone.matches("\\d{10,15}");
+        if (phone == null) return false;
+        String cleaned = phone.replaceAll("[\\s\\-()]", "");
+        return cleaned.matches("\\+\\d{10,15}");
     }
+
 }
