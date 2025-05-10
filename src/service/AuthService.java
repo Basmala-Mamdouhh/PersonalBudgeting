@@ -16,7 +16,8 @@ public class AuthService {
     public static boolean isValidPhone(String phone) {
         if (phone == null) return false;
         String cleaned = phone.replaceAll("[\\s\\-()]", "");
-        return cleaned.matches("\\+\\d{10,15}");
+        return cleaned.matches("^\\+?\\d{10,15}$");
     }
+
 
 }

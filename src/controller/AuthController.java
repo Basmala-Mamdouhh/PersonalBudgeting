@@ -1,5 +1,6 @@
 package controller;
 
+import UI.DashboardUI;
 import service.AuthService;
 import DataBase.UserDB;
 import Domain.User;
@@ -41,6 +42,7 @@ public class AuthController {
         User user = new User(id, email, username,phone, hashed);
         userDB.addUser(user);
         System.out.println("Account created successfully.");
+        DashboardUI.viewdashboard(username,id);
     }
 
     public void handleLogin(String email, String password) {
@@ -55,5 +57,6 @@ public class AuthController {
             return;
         }
         System.out.println("Login successful. Welcome, " + user.getUsername());
+        DashboardUI.viewdashboard(user.getUsername(),user.getId());
     }
 }
