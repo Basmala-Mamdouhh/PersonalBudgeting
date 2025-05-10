@@ -3,15 +3,15 @@ package UI;
 import Domain.Reminder;
 import controller.ReminderController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class ReminderUI {
-    private Scanner scanner = new Scanner(System.in);
-
-    private ReminderController reminderController;
-    private List<Reminder> reminderList;
+    private final Scanner scanner = new Scanner(System.in);
+    private final ReminderController reminderController;
 
     public ReminderUI(ReminderController controller) {
         this.reminderController = controller;
@@ -19,38 +19,55 @@ public class ReminderUI {
 
     public void showDashboard() {
         System.out.println("===== Reminder Dashboard =====");
-        System.out.println("1. Add Reminder");
-        System.out.println("2. View All Reminders");
-        System.out.println("3. Exit");
-        System.out.print("Choose an option: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        System.out.print("Enter your User ID: ");
+        int userId = scanner.nextInt();
+        scanner.nextLine(); // consume newline
 
-        switch (choice) {
-            case 1:
-                addReminder();
-                break;
-            case 2:
-                showReminders(reminderController.getAllReminders());
-                break;
-            default:
-                System.out.println("Exiting...");
+        while (true) {
+            System.out.println("\n1. Add Reminder");
+            System.out.println("2. View My Reminders");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1 -> addReminder(userId);
+                case 2 -> showReminders(reminderController.getRemindersForUser(userId));
+                case 3 -> {
+                    System.out.println("Exiting...");
+                    return;
+                }
+                default -> System.out.println("Invalid choice.");
+            }
         }
     }
 
-    public void addReminder() {
-        System.out.print("Enter reminder text: ");
-        String text = scanner.nextLine();
+    public void addReminder(int userId) {
+        try {
+            System.out.print("Enter reminder title: ");
+            String title = scanner.nextLine();
 
-        System.out.print("Enter date (yyyy-mm-dd): ");
-        String date = scanner.nextLine(); // You can parse this
+            System.out.print("Enter date (yyyy-MM-dd): ");
+            String dateStr = scanner.nextLine();
 
-        System.out.print("Enter time (HH:mm): ");
-        String time = scanner.nextLine(); // You can parse this
+            System.out.print("Enter time (HH:mm): ");
+            String timeStr = scanner.nextLine();
 
-        Reminder reminder = new Reminder(text, date, time);
-        reminderController.addReminder(reminder);
-        showConfirmation("Reminder added successfully.");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+            Date date = dateFormat.parse(dateStr);
+            Date time = timeFormat.parse(timeStr);
+
+            Reminder reminder = new Reminder(0, userId, title, date, time);
+            reminderController.addReminder(userId, reminder);
+            reminderController.scheduleNotification(reminder);
+            showConfirmation("Reminder added successfully.");
+
+        } catch (ParseException e) {
+            System.out.println("❌ Invalid date or time format. Please try again.");
+        }
     }
 
     public void showConfirmation(String msg) {
@@ -64,8 +81,11 @@ public class ReminderUI {
             return;
         }
         for (Reminder r : list) {
-            System.out.println("ID: " + r.getReminderId() + " | Text: " + r.getText() +
-                    " | Date: " + r.getDate() + " | Time: " + r.getTime());
+            System.out.println("ID: " + r.getReminderId() +
+                    " | Title: " + r.getTitle() +
+                    " | Date: " + r.getDate() +
+                    " | Time: " + r.getTime() +
+                    " | Notified: " + r.isNotified());
         }
     }
 }
