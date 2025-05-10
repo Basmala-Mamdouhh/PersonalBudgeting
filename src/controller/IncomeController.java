@@ -2,7 +2,7 @@ package controller;
 
 import DataBase.IncomeDB;
 import DataBase.UserDB;
-import model.Income;
+import Domain.Income;
 import service.IncomeService;
 
 import java.util.List;
