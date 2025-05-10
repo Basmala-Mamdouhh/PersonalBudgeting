@@ -1,4 +1,4 @@
-import controller.UserController;
+import controller.AuthController;
 import DataBase.UserDB;
 
 import java.util.Scanner;
@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         UserDB sharedDB = new UserDB(); // ✅ Shared database instance
-        UserController controller = new UserController(sharedDB);
+        AuthController controller = new AuthController(sharedDB);
 
         boolean running = true;
 

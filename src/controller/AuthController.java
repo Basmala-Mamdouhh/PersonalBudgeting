@@ -5,10 +5,10 @@ import DataBase.UserDB;
 import model.User;
 import model.PasswordHasher;
 
-public class UserController {
+public class AuthController {
     private final UserDB userDB;
 
-    public UserController(UserDB userDB) {
+    public AuthController(UserDB userDB) {
         this.userDB = userDB;
     }
 
@@ -46,7 +46,7 @@ public class UserController {
     public void handleLogin(String email, String password) {
         User user = userDB.findByEmail(email);
         if (user == null) {
-            System.out.println("User not found.");
+            System.out.println("Invalid credentials or user does not exist.");
             return;
         }
 
