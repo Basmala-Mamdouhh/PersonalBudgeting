@@ -2,8 +2,8 @@ package controller;
 
 import service.AuthService;
 import DataBase.UserDB;
-import model.User;
-import model.PasswordHasher;
+import Domain.User;
+import Domain.PasswordHasher;
 
 public class AuthController {
     private final UserDB userDB;
@@ -54,7 +54,6 @@ public class AuthController {
             System.out.println("Invalid password.");
             return;
         }
-
         System.out.println("Login successful. Welcome, " + user.getUsername());
     }
 }

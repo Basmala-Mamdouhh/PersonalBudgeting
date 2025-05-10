@@ -1,6 +1,6 @@
 package DataBase;
 
-import model.User;
+import Domain.User;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package model;
+package Domain;
 
 public class PasswordHasher {
     public static String hash(String password) {
