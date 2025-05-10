@@ -1,13 +1,13 @@
 package UI;
 
 import DataBase.UserDB;
-import controller.UserController;
+import controller.AuthController;
 
 import java.util.Scanner;
 
 public class SignupUI {
     public static void displaymenu(UserDB userDB) {
-        UserController controller = new UserController(userDB);
+        AuthController controller = new AuthController(userDB);
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter Email: ");
         String email = scanner.nextLine();

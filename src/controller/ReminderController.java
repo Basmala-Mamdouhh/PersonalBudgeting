@@ -1,32 +1,66 @@
 package controller;
 
+import DataBase.ReminderDB;
 import Domain.Reminder;
-import service.ReminderService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ReminderController {
-    private final ReminderService reminderService;
+    private final ReminderDB reminderDB;
 
-    public ReminderController(ReminderService reminderService) {
-        this.reminderService = reminderService;
+    public ReminderController(ReminderDB reminderDB) {
+        this.reminderDB = reminderDB;
     }
 
-    public void addReminder(int userId, Reminder reminder) {
-        reminderService.addReminder(userId, reminder);
-        System.out.println("Reminder added successfully.");
-    }
-
-    public List<Reminder> getAllReminders() {
-        return reminderService.getAllReminders();
-    }
-
-    public void updateReminder(int userId, Reminder reminder) {
-        boolean success = reminderService.updateReminder(userId, reminder);
-        if (success) {
-            System.out.println("Reminder updated successfully.");
-        } else {
-            System.out.println("Reminder update failed.");
+    public boolean handleReminder(String title, Date date, Date time, int userId) {
+        if (title == null || title.isBlank()) {
+            System.out.println("Invalid reminder: Title is required.");
+            return false;
         }
+
+        Reminder reminder = new Reminder(userId, title, date, time);
+        reminderDB.addReminder(reminder);
+        System.out.println("Reminder saved successfully.");
+        return true;
+    }
+
+    public void displayUserReminders(int userId) {
+        List<Reminder> reminders = reminderDB.getRemindersByUserId(userId);
+        if (reminders.isEmpty()) {
+            System.out.println("No reminders found for user ID: " + userId);
+            return;
+        }
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        int count = 1;
+        for (Reminder reminder : reminders) {
+            System.out.println(count + ") Title: " + reminder.getTitle() +
+                    ", Date: " + dateFormat.format(reminder.getDate()) +
+                    ", Time: " + timeFormat.format(reminder.getTime()));
+            count++;
+        }
+    }
+
+    public void displayAllReminders() {
+        List<Reminder> reminders = reminderDB.getAllReminders();
+        if (reminders.isEmpty()) {
+            System.out.println("No reminders found.");
+            return;
+        }
+
+        int count = 1;
+        for (Reminder reminder : reminders) {
+            System.out.println(count + ") User ID: " + reminder.getUserId() +
+                    ", Title: " + reminder.getTitle() +
+                    ", Date: " + reminder.getDate() +
+                    ", Time: " + reminder.getTime());
+            count++;
+        }
+    }
+
+    public void clearAllReminders() {
+        reminderDB.clearAllReminders();
     }
 }

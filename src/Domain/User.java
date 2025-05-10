@@ -1,6 +1,7 @@
 package Domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class User implements Serializable {
     private int id;
@@ -9,7 +10,7 @@ public class User implements Serializable {
     private String phoneNumber;
     private String passwordHash;
     private boolean active;
-    private List<Reminder> reminders = new ArrayList<>();
+//    private List<Reminder> reminders = new ArrayList<>();
 
 
 //    public void addReminder(Reminder reminder) {
@@ -36,7 +37,7 @@ public class User implements Serializable {
     public String getPhoneNumber() { return phoneNumber; }
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
-    public List<Reminder> getReminders() {
-        return reminders;
-    }
+//    public List<Reminder> getReminders() {
+//        return reminders;
+//    }
 }

@@ -1,7 +1,7 @@
 package UI;
 
 import DataBase.UserDB;
-import controller.UserController;
+import controller.AuthController;
 
 import java.util.Scanner;
 

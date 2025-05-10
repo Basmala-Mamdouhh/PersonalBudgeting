@@ -1,5 +1,5 @@
 import UI.MainmenuUI;
-import controller.UserController;
+import controller.AuthController;
 import DataBase.UserDB;
 
 import java.util.Scanner;

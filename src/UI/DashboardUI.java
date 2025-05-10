@@ -1,5 +1,9 @@
 package UI;
 
+import DataBase.ReminderDB;
+import controller.ReminderController;
+import service.ReminderService;
+
 import java.util.Scanner;
 
 public class DashboardUI {
@@ -18,7 +22,6 @@ public class DashboardUI {
             if(choice.equals("1")) {
                 IncomeUI Income_UI = new IncomeUI();
                 Income_UI.Mainmenu(user_id);
-
             }
             else if(choice.equals("2")) {
 
@@ -27,7 +30,11 @@ public class DashboardUI {
 
             }
             else if(choice.equals("4")) {
-
+                ReminderDB reminderdb = new ReminderDB();
+                ReminderController reminderController = new ReminderController(reminderdb);
+                ReminderService reminderService = new ReminderService();
+                ReminderUI reminderui = new ReminderUI(reminderController,reminderService);
+                reminderui.mainMenu(user_id);
             }
             else if(choice.equals("5")) {
                 System.exit(0);
