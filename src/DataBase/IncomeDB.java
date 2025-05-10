@@ -1,6 +1,6 @@
 package DataBase;
 
-import model.Income;
+import Domain.Income;
 
 import java.io.*;
 import java.util.ArrayList;
