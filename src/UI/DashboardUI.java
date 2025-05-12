@@ -32,14 +32,14 @@ public class DashboardUI {
                 budgetUI.Mainmenu(user_id);
             }
             else if(choice.equals("4")) {
-                ReminderDB reminderdb = new ReminderDB();
-                ReminderController reminderController = new ReminderController(reminderdb);
-                ReminderService reminderService = new ReminderService();
-                ReminderUI reminderui = new ReminderUI(reminderController,reminderService);
+                ReminderUI reminderui = new ReminderUI();
                 reminderui.mainMenu(user_id);
             }
             else if(choice.equals("5")) {
                 System.exit(0);
+            }
+            else{
+                System.out.println("Invalid choice");
             }
         }
     }

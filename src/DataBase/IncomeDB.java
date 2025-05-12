@@ -44,9 +44,6 @@ public class IncomeDB {
         saveIncomes();
     }
 
-    public List<Income> getAllIncomes() {
-        return new ArrayList<>(incomes);
-    }
 
     public List<Income> getIncomesByUserId(int userId) {
         return incomes.stream()
@@ -55,9 +52,4 @@ public class IncomeDB {
 
     }
 
-    public void clearAllIncomes() {
-        incomes.clear();
-        saveIncomes();
-        System.out.println("All income records have been deleted.");
-    }
 }

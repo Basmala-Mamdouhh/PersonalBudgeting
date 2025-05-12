@@ -1,5 +1,6 @@
 package UI;
 
+import DataBase.ReminderDB;
 import Domain.Reminder;
 import controller.ReminderController;
 import service.ReminderService;
@@ -9,13 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReminderUI {
-    private final Scanner scanner = new Scanner(System.in);
-    private final ReminderController reminderController;
-    private final ReminderService reminderService;
+    private ReminderDB reminderDB = new ReminderDB();
+    private Scanner scanner = new Scanner(System.in);
+    private ReminderController reminderController = new ReminderController(reminderDB);
 
-    public ReminderUI(ReminderController reminderController, ReminderService reminderService) {
-        this.reminderController = reminderController;
-        this.reminderService = reminderService;
+    public ReminderUI() {
     }
 
     public void mainMenu(int userId) {
@@ -43,32 +42,32 @@ public class ReminderUI {
     }
 
     public void addReminder(int userId) {
-        System.out.print("Enter reminder title: ");
-        String title = scanner.nextLine();
+        while (true) {
+            System.out.print("Enter reminder title: ");
+            String title = scanner.nextLine();
 
-        System.out.print("Enter date (yyyy-MM-dd): ");
-        String dateStr = scanner.nextLine();
+            System.out.print("Enter date (yyyy-MM-dd): ");
+            String dateStr = scanner.nextLine();
 
-        System.out.print("Enter time (HH:mm): ");
-        String timeStr = scanner.nextLine();
+            System.out.print("Enter time (HH:mm): ");
+            String timeStr = scanner.nextLine();
 
 
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = dateFormat.parse(dateStr);
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = dateFormat.parse(dateStr);
 
-            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-            Date time = timeFormat.parse(timeStr);
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                Date time = timeFormat.parse(timeStr);
+                if(reminderController.handleReminder(title, date, time, userId)){
+                    break;
+                };
 
-            Reminder reminder = new Reminder(userId, title, date, time);
-            boolean error = reminderService.isValidReminder(reminder);
-            if (error) {
-                reminderController.handleReminder(title, date, time, userId);
+            } catch (ParseException e) {
+                System.out.println("Invalid date/time format.");
             }
-
-        } catch (ParseException e) {
-            System.out.println("Invalid date/time format.");
         }
+
     }
 
     public void viewReminders(int userId) {

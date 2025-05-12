@@ -44,9 +44,6 @@ public class ReminderDB {
         saveReminders();
     }
 
-    public List<Reminder> getAllReminders() {
-        return new ArrayList<>(reminders);
-    }
 
     public List<Reminder> getRemindersByUserId(int userId) {
         return reminders.stream()
@@ -54,9 +51,4 @@ public class ReminderDB {
                 .collect(Collectors.toList());
     }
 
-    public void clearAllReminders() {
-        reminders.clear();
-        saveReminders();
-        System.out.println("All reminder records have been deleted.");
-    }
 }

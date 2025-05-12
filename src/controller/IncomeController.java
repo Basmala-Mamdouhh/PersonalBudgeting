@@ -29,6 +29,10 @@ public class IncomeController {
 
     public void displayuserIncome(int user_id) {
         List<Income>  allIncomes = incomeDB.getIncomesByUserId(user_id);
+        if (allIncomes.isEmpty()) {
+            System.out.println("No Income found for user ID: " + user_id);
+            return;
+        }
         int count = 1;
         for (Income income : allIncomes) {
             System.out.println( count + ") Source: " + income.getIncomeSource() +

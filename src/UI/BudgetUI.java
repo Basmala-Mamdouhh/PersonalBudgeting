@@ -6,9 +6,9 @@ import controller.BudgetController;
 import java.util.Scanner;
 
 public class BudgetUI {
-    Scanner scanner = new Scanner(System.in);
-    BudgetDB budgetDB = new BudgetDB();
-    BudgetController Budget_controller = new BudgetController(budgetDB);
+    private Scanner scanner = new Scanner(System.in);
+    private BudgetDB budgetDB = new BudgetDB();
+    private BudgetController Budget_controller = new BudgetController(budgetDB);
 
     public void AddBudgetUI(int user_id) {
         while (true){
@@ -16,6 +16,7 @@ public class BudgetUI {
             String BudgetCategory = scanner.nextLine();
             System.out.println("Enter the Budget limit");
             double BudgetLimit = scanner.nextDouble();
+            scanner.nextLine();
             if(Budget_controller.HandleBudget(BudgetCategory,BudgetLimit,user_id)){
                 break;
             }
@@ -43,6 +44,8 @@ public class BudgetUI {
                     break;
                 case "3":
                     return;
+                default:
+                    System.out.println("Invalid choice");
             }
         }
 

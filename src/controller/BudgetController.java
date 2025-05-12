@@ -30,6 +30,10 @@ public class BudgetController {
 
     public void displayuserbudget(int user_id) {
         List<Budget> allbudgets = budgetDB.getBudgetsByUserId(user_id);
+        if (allbudgets.isEmpty()) {
+            System.out.println("No Budgets found for user ID: " + user_id);
+            return;
+        }
         int count = 1;
         for (Budget budget : allbudgets) {
             System.out.println( count + ") Budget Category: " + budget.getCategory()+

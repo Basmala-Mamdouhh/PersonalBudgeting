@@ -31,6 +31,10 @@ public class ExpensesController {
 
     public void DisplayUserExpenses(int user_id) {
         List<Expense> allexpenses = expenseDB.getExpensesByUserId(user_id);
+        if (allexpenses.isEmpty()) {
+            System.out.println("No Expense found for user ID: " + user_id);
+            return;
+        }
         int count = 1;
         for (Expense expense : allexpenses) {
             System.out.println( count + ") Expense Category: " + expense.getCategory()+

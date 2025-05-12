@@ -44,9 +44,6 @@ public class ExpenseDB {
         saveExpenses();
     }
 
-    public List<Expense> getAllExpenses() {
-        return new ArrayList<>(expenses);
-    }
 
     public List<Expense> getExpensesByUserId(int userId) {
         return expenses.stream()
@@ -54,9 +51,4 @@ public class ExpenseDB {
                 .collect(Collectors.toList());
     }
 
-    public void clearAllExpenses() {
-        expenses.clear();
-        saveExpenses();
-        System.out.println("All expense records have been deleted.");
-    }
 }

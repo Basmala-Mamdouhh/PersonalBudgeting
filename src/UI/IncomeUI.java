@@ -6,16 +6,17 @@ import controller.IncomeController;
 import java.util.Scanner;
 
 public class IncomeUI {
+    private IncomeDB incomeDB = new IncomeDB();
+    private IncomeController Income_controller = new IncomeController(incomeDB);
+    private Scanner scanner = new Scanner(System.in);
 
     public void AddIncomeUI(int user_id) {
-        IncomeDB incomeDB = new IncomeDB();
-        IncomeController Income_controller = new IncomeController(incomeDB);
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the income source");
         String incomeSource = scanner.nextLine();
         while (true){
             System.out.println("Enter the income value");
             double incomeValue = scanner.nextDouble();
+            scanner.nextLine();
             if(Income_controller.HandleIncome(incomeSource,incomeValue,user_id)){
                 break;
             }
@@ -24,13 +25,10 @@ public class IncomeUI {
     }
 
     public void displayIncomeUI(int user_id) {
-        IncomeDB incomeDB = new IncomeDB();
-        IncomeController Income_controller = new IncomeController(incomeDB);
         Income_controller.displayuserIncome(user_id);
     }
 
     public void Mainmenu(int user_id){
-        Scanner scanner = new Scanner(System.in);
         while(true){
             System.out.println("Welcome to Income UI");
             System.out.println("1. Add Income");
@@ -46,6 +44,8 @@ public class IncomeUI {
                     break;
                 case "3":
                     return;
+                default:
+                    System.out.println("Invalid choice");
             }
         }
 

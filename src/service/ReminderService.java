@@ -2,29 +2,26 @@ package service;
 
 import Domain.Reminder;
 
+import java.util.Date;
+
 public class ReminderService {
 
-    public boolean isValidReminder(Reminder reminder) {
-        if (reminder == null) {
-            System.out.println("Reminder cannot be null.");
-            return false;
-        }
+    public static boolean isValidReminder( String title, Date date, Date time) {
 
-        if (reminder.getTitle() == null || reminder.getTitle().isBlank()) {
+        if (title == null || title.isBlank()) {
             System.out.println("Title is required.");
             return false;
         }
 
-        if (reminder.getDate() == null) {
+        if (date == null) {
             System.out.println("Date is required.");
             return false;
         }
 
-        if (reminder.getTime() == null) {
+        if (time == null) {
             System.out.println("Time is required.");
             return false;
         }
-
         return true;
     }
 }

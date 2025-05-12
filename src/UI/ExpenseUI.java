@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ExpenseUI {
-    Scanner scanner = new Scanner(System.in);
-    ExpenseDB expenseDB = new ExpenseDB();
-    ExpensesController expensesController = new ExpensesController(expenseDB);
+    private Scanner scanner = new Scanner(System.in);
+    private ExpenseDB expenseDB = new ExpenseDB();
+    private ExpensesController expensesController = new ExpensesController(expenseDB);
     public void AddExpenseUI(int user_id) {
         while (true){
             System.out.println("Enter the expense Category");
@@ -51,6 +51,8 @@ public class ExpenseUI {
                     break;
                 case "3":
                     return;
+                default:
+                    System.out.println("Invalid choice");
             }
         }
 

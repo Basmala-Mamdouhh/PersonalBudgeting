@@ -51,9 +51,6 @@ public class UserDB {
         return users.stream().filter(u -> u.getEmail().equalsIgnoreCase(email)).findFirst().orElse(null);
     }
 
-    public User findByUsername(String username) {
-        return users.stream().filter(u -> u.getUsername().equalsIgnoreCase(username)).findFirst().orElse(null);
-    }
 
     public void addUser(User user) {
         users.add(user);

@@ -19,11 +19,9 @@ public class MainmenuUI {
             String choice = scanner.nextLine();
             if(choice.equals("1")) {
                 SignupUI.displaymenu(userDB);
-                break;
             }
             else if(choice.equals("2")) {
                 SigninUI.viewsigninUI(userDB);
-                break;
             }
             else if(choice.equals("3")) {
                 System.exit(0);
