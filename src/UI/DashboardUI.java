@@ -24,10 +24,12 @@ public class DashboardUI {
                 Income_UI.Mainmenu(user_id);
             }
             else if(choice.equals("2")) {
-
+                ExpenseUI expenseUI = new ExpenseUI();
+                expenseUI.Mainmenu(user_id);
             }
             else if(choice.equals("3")) {
-
+                BudgetUI budgetUI = new BudgetUI();
+                budgetUI.Mainmenu(user_id);
             }
             else if(choice.equals("4")) {
                 ReminderDB reminderdb = new ReminderDB();

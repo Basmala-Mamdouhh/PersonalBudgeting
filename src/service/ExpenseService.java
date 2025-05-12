@@ -7,29 +7,22 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ExpenseService {
-    private final ExpenseDB expenseDB;
 
-    public ExpenseService(ExpenseDB expenseDB) {
-        this.expenseDB = expenseDB;
-    }
-
-    public String addExpense(String category, double amount, String paymentMethod, LocalDate date, int userId) {
+    public static boolean checkExpense(String category, double amount, String paymentMethod, LocalDate date, int userId) {
         if (category == null || category.length() < 3 || category.length() > 50) {
-            return "Invalid category name.";
+            System.out.println("Invalid category name.");
+            return false;
         }
         if (amount <= 0) {
-            return "Amount must be positive.";
+            System.out.println("Amount must be positive.");
+            return false;
         }
         if (date == null || date.isAfter(LocalDate.now().plusYears(10))) {
-            return "Invalid date.";
+            System.out.println("Invalid date.");
+            return false;
         }
-
-        Expense expense = new Expense(category, amount, paymentMethod, date, userId);
-        expenseDB.addExpense(expense);
-        return "Expense added successfully.";
+        return true;
     }
 
-    public List<Expense> getUserExpenses(int userId) {
-        return expenseDB.getExpensesByUserId(userId);
-    }
+
 }

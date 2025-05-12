@@ -14,16 +14,14 @@ public class ReminderController {
         this.reminderDB = reminderDB;
     }
 
-    public boolean handleReminder(String title, Date date, Date time, int userId) {
+    public void handleReminder(String title, Date date, Date time, int userId) {
         if (title == null || title.isBlank()) {
             System.out.println("Invalid reminder: Title is required.");
-            return false;
         }
 
         Reminder reminder = new Reminder(userId, title, date, time);
         reminderDB.addReminder(reminder);
         System.out.println("Reminder saved successfully.");
-        return true;
     }
 
     public void displayUserReminders(int userId) {
@@ -41,26 +39,5 @@ public class ReminderController {
                     ", Time: " + timeFormat.format(reminder.getTime()));
             count++;
         }
-    }
-
-    public void displayAllReminders() {
-        List<Reminder> reminders = reminderDB.getAllReminders();
-        if (reminders.isEmpty()) {
-            System.out.println("No reminders found.");
-            return;
-        }
-
-        int count = 1;
-        for (Reminder reminder : reminders) {
-            System.out.println(count + ") User ID: " + reminder.getUserId() +
-                    ", Title: " + reminder.getTitle() +
-                    ", Date: " + reminder.getDate() +
-                    ", Time: " + reminder.getTime());
-            count++;
-        }
-    }
-
-    public void clearAllReminders() {
-        reminderDB.clearAllReminders();
     }
 }

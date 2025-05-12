@@ -44,19 +44,10 @@ public class BudgetDB {
         saveBudgets();
     }
 
-    public List<Budget> getAllBudgets() {
-        return new ArrayList<>(budgets);
-    }
-
     public List<Budget> getBudgetsByUserId(int userId) {
         return budgets.stream()
                 .filter(budget -> budget.getUserId() == userId)
                 .collect(Collectors.toList());
     }
 
-    public void clearAllBudgets() {
-        budgets.clear();
-        saveBudgets();
-        System.out.println("All budget records have been deleted.");
-    }
 }
