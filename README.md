@@ -1,64 +1,64 @@
 # 💰 Personal Budgeting System
 
-This is a Java-based personal budgeting system that helps users manage their expenses, income, savings goals, and reminders through a clean, modular design based on the MVC architecture.
+**Personal Budgeting System** is a modular Java application designed to help users efficiently manage their finances. It enables tracking of expenses, income, savings goals, and reminders through a well-structured system built using the **Model-View-Controller (MVC)** architectural pattern.
 
 ---
 
-## 📐 Architecture Overview
+## 📐 System Architecture
 
-The system follows the **MVC (Model-View-Controller)** architecture, with a clear separation between:
+The system follows a layered architecture that separates responsibilities across clearly defined modules:
 
-- **UI Layer** – Handles user interactions
-- **Controller Layer** – Connects UI to business logic
-- **Service Layer** – Contains business rules and application logic
-- **Database Layer** – Manages data persistence using file-based storage
-- **Domain Layer** – Contains the core data models
+- **UI Layer** – Handles user interaction and interface display
+- **Controller Layer** – Mediates between UI and services
+- **Service Layer** – Implements business logic and validation
+- **Domain Layer** – Defines core data models (e.g., `User`, `Expense`, `Reminder`, `Goal`, `Budget`)
+- **Database Layer** – Simulates persistent storage using file-based Java serialization
 
-This structure ensures modularity, reusability, and maintainability of the code.
-
----
-
-## 🧩 Main Features
-
-- 👤 **User Login / Signup**
-- 💸 **Expense Tracking**
-- 💼 **Income Management**
-- 🎯 **Savings Goals**
-- 🧠 **Reminders & Notifications**
-- 📊 **Budgeting and Reports**
-- 📁 **Data Persistence using Serialization**
+This structure promotes modularity, maintainability, and ease of future enhancements.
 
 ---
 
-## 📂 Code Structure
+## 🧩 Features
+
+- 👤 **User Authentication** – Sign up, log in, and session management  
+- 💸 **Expense Tracking** – Add, edit, and view categorized expenses  
+- 💼 **Income Management** – Record multiple income sources and amounts  
+- 🎯 **Savings Goals** – Define financial goals and monitor progress  
+- 🧠 **Reminders** – Schedule financial task reminders with date/time  
+- 📊 **Budgeting & Reports** – Set category-wise budget limits and view financial summaries  
+- 💾 **Data Persistence** – All data stored using Java serialization for offline access
+
+---
+
+## 📁 Project Structure
 
 project-root/
 │
-├── UI/ # User interfaces (console-based)
-├── controller/ # Controllers linking UI and services
-├── service/ # Business logic and rule enforcement
-├── domain/ # Core data models (Reminder, Expense, User, etc.)
-├── database/ # File-based database simulation
-└── README.md # This file
-
+├── UI/ # Console-based or graphical interfaces
+├── controller/ # Controllers linking UI with business logic
+├── service/ # Business rules and application logic
+├── domain/ # Core data models (entities)
+├── database/ # File-based data persistence (using serialization)
+└── README.md # Project overview
 
 ---
 
-## 🗃️ Data Persistence (Database Layer)
+## 🗃️ Data Persistence (Database Simulation)
 
-Instead of using a traditional database, we simulate data storage using **Java Serialization**:
+The system simulates a database using **Java Serialization**, allowing it to save and load data as serialized objects.
 
-- All model classes implement the `Serializable` interface.
-- Data is stored and retrieved from `.ser` files.
-- The `database` package contains classes like:
-  - `UserDB`, `ReminderDB`, `ExpenseDB`  
-- These handle reading/writing objects to and from disk.
+- All model classes implement `Serializable`
+- Data is stored in `.ser` or `.txt` files
+- Example storage classes:
+  - `UserDB`
+  - `ExpenseDB`
+  - `ReminderDB`
 
-This approach is lightweight and practical for academic or small-scale applications.
+This approach is ideal for small-scale or academic projects, offering simplicity and portability without external dependencies.
 
 ---
 
 ## 📄 Documentation
 
-- The project is fully documented using **JavaDocs**.
-- Each class and method includes descriptive comments.
+- All classes and methods are fully documented using **JavaDocs**
+- Inline comments are included for clarity and maintainability
