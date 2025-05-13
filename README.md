@@ -32,13 +32,7 @@ This structure promotes modularity, maintainability, and ease of future enhancem
 
 ## 📁 Project Structure
 
-project-root/
-├── UI/
-├── controller/
-├── service/
-├── domain/
-├── database/
-└── README.md
+<pre> ```plaintext project-root/ │ ├── UI/ # User Interface (console or GUI) ├── controller/ # Connects UI to business logic ├── service/ # Contains core logic and validations ├── domain/ # Core models (Reminder, Expense, User, etc.) ├── database/ # File-based storage using serialization └── README.md # Project documentation ``` </pre>
 
 ---
 
