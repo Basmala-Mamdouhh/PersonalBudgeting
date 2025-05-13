@@ -33,13 +33,12 @@ This structure promotes modularity, maintainability, and ease of future enhancem
 ## 📁 Project Structure
 
 project-root/
-│
-├── UI/ # Console-based or graphical interfaces
-├── controller/ # Controllers linking UI with business logic
-├── service/ # Business rules and application logic
-├── domain/ # Core data models (entities)
-├── database/ # File-based data persistence (using serialization)
-└── README.md # Project overview
+├── UI/
+├── controller/
+├── service/
+├── domain/
+├── database/
+└── README.md
 
 ---
 
