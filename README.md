@@ -32,7 +32,16 @@ This structure promotes modularity, maintainability, and ease of future enhancem
 
 ## 📁 Project Structure
 
-``` project-root/ │ ├── UI/ # User Interface (console-based) ├── controller/ # Controllers connecting UI to services ├── service/ # Business logic layer ├── domain/ # Core data models (entities) ├── database/ # File-based database simulation using serialization └── README.md # Project documentation ```
+```
+project-root/
+│ 
+├── UI/ # User Interface (console-based)
+├── controller/ # Controllers connecting UI to services
+├── service/ # Business logic layer
+├── domain/ # Core data models (entities)
+├── database/ # File-based database simulation using serialization
+└── README.md # Project documentation
+```
 
 ## 🗃️ Data Persistence (Database Simulation)
 
